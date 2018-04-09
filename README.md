@@ -33,7 +33,7 @@ First of all, **I'm not going to redistribute the game's handling files** on thi
 
 So let's assume you're setting up a Discord bot command with [Discord.js](http://discord.js.org) to fetch handling data.
 
-First, place *handling.js* next to your main .js file for your bot. Next, make a directory next to it where you'll put all the .meta files from the game.
+First, place *handling.js* next to your main .js file for your bot. Next, make a directory next to it where you'll put all the .meta files from the game. It's important that **only these files** exist in this directory, and nothing else!
 
 **IMPORTANT**: Make sure that all of your handling files in the directory follow a naming scheme such as **handling_mpassault.meta**. That is "handling_" followed by the internal name of the DLC it's from, as seen in [OpenIV](http://openiv.com) (or simply "update" in the case of update.rpf), and finally the ".meta" extension.
 
@@ -166,7 +166,7 @@ ___
 ```javascript
 function convertFlagsPropertyToFlagNames(hex, propertyName)
 ```
-> Converts "flag" type properties into human-readable flag names.
+> Converts "flag" type properties into human-readable flag names. It interprets these values the correct way as bitmasks, instead of just looking at the digits in the hex, as this is what the game does too. This also means that it has no problem decoding letters in the hex instead of just numbers.
 >
 > **Arguments**
 >
