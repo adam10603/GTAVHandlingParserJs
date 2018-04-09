@@ -206,7 +206,7 @@ const propertyKeywords = {
 // There has to be exactly 32 in each array, in the right order.
 // The array index corresponds to the bit it names in the bitmask.
 // For example strHandlingFlags[5] should have the name for the flag (0x1 << 5)
-// Undocumented flags are be named after their value in the following format: "(0x1 << 2)"
+// Undocumented flags are named after their value in the following format: "(0x1 << 2)"
 const flagNames = {
     strModelFlags: [
         "IS_VAN",
