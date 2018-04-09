@@ -1,7 +1,6 @@
 # GTA V Handling Parser (for Node.js)
 ![v1.0](https://img.shields.io/badge/Version-1.0-green.svg)
 
-___
 Table of contents:
   * [Intro](#intro)
   * [Usage](#usage)
