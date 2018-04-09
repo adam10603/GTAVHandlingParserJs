@@ -1,6 +1,15 @@
 # GTA V Handling Parser (for Node.js)
 ###### _Version 1.0_
 
+___
+Table of contents:
+  * [Intro](#intro)
+  * [Usage](#usage)
+  * [Documentation of the API](#documentation-of-the-api)
+  * [Object structure of handling data](#object-structure-of-handling-data)
+  * [Version history](#version-history)
+___
+
 
 ## Intro
 
@@ -288,7 +297,7 @@ Here's an example object with one property of each possible data type, represent
 Notice that "handlingName" is not returned, so keep track of the vehicle name separately.
 
 
-## Version history:
+## Version history
 
 
 * v1.0:
