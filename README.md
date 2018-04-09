@@ -102,7 +102,7 @@ Here's an example of a Discord command I built into my bot:
 
 ![Discord bot command](https://i.imgur.com/wg9edCt.png)
 
-Of course it could be used outside of this application too, as the code is for the most part vanilla javascript. A web app, anyone?
+Of course it could be used outside of Discord bots too, as the code is for the most part vanilla JS. A web app, anyone?
 
 
 ## Documentation of the API
