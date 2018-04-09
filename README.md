@@ -21,7 +21,7 @@ Main features:
 ## Usage
 
 
-First of all, I'm not going to redistribute the game's handling files on this repository, so you'll have to source those yourself.
+First of all, **I'm not going to redistribute the game's handling files** on this repository, so you'll have to **source those yourself**.
 
 So let's assume you're setting up a Discord bot command with [Discord.js](http://discord.js.org) to fetch handling data.
 
