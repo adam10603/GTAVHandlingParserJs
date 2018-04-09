@@ -7,7 +7,7 @@
 
 This is a Node.js library (although it's mostly vanilla Javascript) to read and parse .meta handling files from GTA V 🤓
 
-It's primarily intended to be used with Discord bots, such as for building a command that fetches handling data for GTA V vehicles.
+It's primarily intended to be used with Discord bots, such as for building a command that fetches handling data for GTA V vehicles, but of course it works in other applications too.
 
 Main features:
 
