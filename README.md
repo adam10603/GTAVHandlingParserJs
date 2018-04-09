@@ -4,7 +4,7 @@
 Table of contents:
   * [Intro](#intro)
   * [Usage](#usage)
-  * [Documentation of the API](#documentation-of-the-api)
+  * [API docs](#api-docs)
   * [Object structure of handling data](#object-structure-of-handling-data)
   * [Version history](#version-history)
 ___
@@ -113,7 +113,7 @@ Here's an example of a Discord command I built into my bot:
 Of course it could be used outside of Discord bots too, the core part of it is just vanilla JS. Maybe a web app, anyone?
 
 
-## Documentation of the API
+## API docs
 
 
 ```javascript
