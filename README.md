@@ -168,7 +168,7 @@ function convertFlagsPropertyToFlagNames(hex, propertyName)
 >
 > **Return value**
 >
-> An array of strings that represent the flags, or `null` on error. Unknown flags are represented by their value via a bit-shift expression, such as "(0x1 << 3)".
+> An array of strings that represent the flags, or `null` on error. Unknown flags are represented by their value as a bit-shift expression, such as "(0x1 << 3)".
 
 ___
 
