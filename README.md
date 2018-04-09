@@ -29,8 +29,7 @@ First, place *handling.js* next to your main .js file for your bot. Next, make a
 
 **IMPORTANT**: Make sure that all of your handling files in the directory follow a naming scheme such as **handling_mpassault.meta**. That is "handling_" followed by the internal name of the DLC it's from, as seen in [OpenIV](http://openiv.com) (or simply "update" in the case of update.rpf), and finally the ".meta" extension.
 
-Next, add some code to your bot, something along these lines:
-*(Of course you should do some more error handling and stuff, this is just a bare bones example)*
+Next, add some code to your bot, something along these lines *(Of course you should do some more error handling and stuff, this is just a bare bones example)*:
 
 ```javascript
 
