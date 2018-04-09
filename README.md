@@ -111,7 +111,7 @@ Of course it could be used outside of Discord bots too, the core part of it is j
 ```javascript
 function loadFiles(path, force = false)
 ```
-> You need to call this once during startup before calling any other functions from the API. It loads and parses all the handling files from the specified directory.
+> **You need to call this once during startup** before calling any other functions from the API. It loads and parses all the handling files from the specified directory.
 >
 > **Arguments**
 >
