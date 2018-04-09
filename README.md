@@ -99,6 +99,12 @@ client.login('token');
 
 ```
 
+Here's an example of a Discord command I built into my bot:
+
+![Discord bot command](https://i.imgur.com/wg9edCt.png)
+
+Of course it could be used outside of this application too, as the code is for the most part vanilla javascript. A web app, anyone?
+
 
 ## Documentation of the API
 
@@ -208,7 +214,7 @@ function getHandlingForVehicle(vehicle)
 >
 > **Return value**
 >
-> Object (see structure in the [next section](#handling-data-object-structure)), or `null` on error.
+> Object (see structure in the [next section](#object-structure-of-handling-data)), or `null` on error.
 
 ___
 
@@ -223,7 +229,7 @@ function getSimpleHandlingForVehicle(vehicle)
 >
 > **Return value**
 >
-> Object (see structure in the [next section](#handling-data-object-structure)), or `null` on error.
+> Object (see structure in the [next section](#object-structure-of-handling-data)), or `null` on error.
 
 ___
 
@@ -240,7 +246,7 @@ function getPropertyForVehicle(vehicle, property)
 >
 > **Return value**
 >
-> Object (see structure in the [next section](#handling-data-object-structure)), or `null` on error.
+> Object (see structure in the [next section](#object-structure-of-handling-data)), or `null` on error.
 
 ___
 
@@ -257,10 +263,10 @@ function findPropertiesForVehicle(vehicle, propertySearch)
 >
 > **Return value**
 >
-> Object (see structure in the [next section](#handling-data-object-structure)), or `null` on error.
+> Object (see structure in the [next section](#object-structure-of-handling-data)), or `null` on error.
 
 
-## Handling data object structure
+## Object structure of handling data
 
 
 The structure of objects that hold handling data (e.g. as returned by `findPropertiesForVehicle()`) is pretty simple. For the most part, it's just a **flat object with property names** as keys, and their values as values obviously. They are **not grouped** into any sub-objects or anything (regardless if the property is inside "SubHandlingData" in the original file for example), with one exception, which are 3-component vectors (properties that start with "vec"). These are just objects with `x`, `y` and `z` floating point components.
