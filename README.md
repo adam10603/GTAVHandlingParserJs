@@ -1,5 +1,5 @@
 # GTA V Handling Parser (for Node.js)
-![Version](https://img.shields.io/badge/Version-1.0-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
+![Version](https://img.shields.io/badge/Version-1.01-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
 
 Table of contents:
   * [Intro](#intro)
@@ -13,9 +13,9 @@ ___
 ## Intro
 
 
-This is a Node.js library (although mostly vanilla Javascript) to read and parse .meta handling files from GTA V 🤓
+This is a Node.js library to read and parse .meta handling files from GTA V.
 
-It's primarily intended to be used with Discord bots, such as for building a command that fetches handling data for GTA V vehicles, but it's just standalone Node.js code, not tied to any Discord APIs in itself, so feel free to use it anywhere.
+It's primarily intended to be used with Discord bots, such as for building a command that fetches the handling of GTA V vehicles, but it's just standalone Node.js code, so feel free to use it anywhere else too.
 
 Main features:
 
@@ -29,19 +29,19 @@ Main features:
 ## Usage
 
 
-First of all, **I'm not going to redistribute the game's handling files** on this repository, so you'll have to **source those yourself**.
+First of all, **I'm not going to upload game files** on this repository, so you'll have to source those yourself.
 
 So let's assume you're setting up a Discord bot command with [Discord.js](http://discord.js.org) to fetch handling data.
 
-First, place *handling.js* next to your main .js file for your bot. Next, make a directory next to it where you'll put all the .meta files from the game. It's important that **only these files** exist in this directory, and nothing else!
+First, place *handling.js* next to your main .js file for your bot. Next, make a directory next to it where you'll put all the .meta files from the game. It's important that **only these files** exist in this directory!
 
-**IMPORTANT**: Make sure that all of your handling files in the directory follow a naming scheme such as **handling_mpassault.meta**. That is "handling_" followed by the internal name of the DLC it's from, as seen in [OpenIV](http://openiv.com) (or simply "update" in the case of update.rpf), and finally the ".meta" extension.
+**IMPORTANT**: Make sure that all of your handling files are named as such: **handling_mpassault.meta**. That is "handling_" followed by the internal name of the DLC it's from, as seen in [OpenIV](http://openiv.com) (or simply "update" if it's from update.rpf), and finally the ".meta" extension.
 
 Next, add some code to your bot, something along these lines *(Of course you should do some more error handling and stuff, this is just a bare bones example)*:
 
 ```javascript
 
-const handling = require("./handling"); // Including "handling.js"
+const handling = require("./handling"); // Including the handling library
 const Discord  = require('discord.js');
 const client   = new Discord.Client();
 
@@ -54,7 +54,7 @@ client.on('message', msg => {
         // Getting an array of all arguments
         var args = msgLowercase.substr(10).split(" ");
 
-        // First argument is the vehicle name
+        // First argument is the vehicle name (not using the rest in this example)
         var vehicleName = args[0];
 
         if (!handling.doesVehicleExist(vehicleName)) {
@@ -64,31 +64,12 @@ client.on('message', msg => {
             return;
         }
 
-        var vehicleHandling = null; // We'll store the handling data here
-
-        if (args.length > 1) { // If there's more arguments after the vehicle, pass them to the handling library as search terms in a loop
-
-            vehicleHandling = {};
-
-            for (var i=1; i<args.length; i++) { // Looping through the additional arguments
-                var tmpHandling = handling.findPropertiesForVehicle(vehicleName, args[i]);
-                if (tmpHandling !== null) Object.assign(vehicleHandling, tmpHandling); // Appending results to what we already have, combining the results of all search terms
-            }
-
-            if (Object.keys(vehicleHandling).length === 0) {
-                /*
-                 * Search terms didn't return anything, notify user of it...
-                 */
-                return;
-            }
-
-        } else {
-            vehicleHandling = handling.getSimpleHandlingForVehicle(vehicleName); // No arguments after vehicle, get the simple handling summary
-        }
+        // Getting the simple handling summary
+        var vehicleHandling = vehicleHandling = handling.getSimpleHandlingForVehicle(vehicleName);
 
         if (vehicleHandling === null) {
             /*
-             * No results for some reason, notify user of it...
+             * Something went wrong, notify user of it...
              */
         } else {
             /*
@@ -98,7 +79,7 @@ client.on('message', msg => {
     }
 });
 
-// Load the handling files before logging in
+// Load the handling files before logging in!
 console.log("Loading handling files...");
 handling.loadFiles("handling_data"); // Tell it the name of the directory containing the files
 
@@ -119,7 +100,7 @@ Of course it could be used outside of Discord bots too, the core part of it is j
 ```javascript
 function loadFiles(path, force = false)
 ```
-> **You need to call this once during startup** before calling any other functions from the API. It loads and parses all the handling files from the specified directory.
+> **You need to call this once** before calling any other functions. It loads and parses all the handling files from the specified directory.
 >
 > **Arguments**
 >
@@ -151,7 +132,7 @@ ___
 ```javascript
 function getCategoryOfProperty(propertyName)
 ```
-> Returns the category of a certain property. This is helpful for better organizing the response message.
+> Returns the category of a property. This is helpful for better organizing the response message.
 >
 > **Arguments**
 >
@@ -164,9 +145,24 @@ function getCategoryOfProperty(propertyName)
 ___
 
 ```javascript
+function getKeywords()
+```
+> Returns all possible keywords and the names of properties that they are associated with.
+>
+> **Arguments**
+>
+> None.
+>
+> **Return value**
+>
+> An object indexed by keywords, each having an array of strings that are the property names associated with the keyword.
+
+___
+
+```javascript
 function convertFlagsPropertyToFlagNames(hex, propertyName)
 ```
-> Converts "flag" type properties into human-readable flag names. It interprets these values the correct way as bitmasks, instead of just looking at the digits in the hex, as this is what the game does too. This also means that it has no problem decoding letters in the hex instead of just numbers.
+> Converts "flag" type properties into human-readable flag names. It interprets these values the correct way as bitmasks, instead of just looking at the hex characters, as this is how the game interprets them as well.
 >
 > **Arguments**
 >
@@ -299,9 +295,11 @@ Notice that "handlingName" is not returned, so keep track of the vehicle name se
 ## Version history
 
 
-* v1.0:
+* v1.0
   * Initial release
-
+* v1.01
+  * Added `getKeywords()`
+  * Small code changes
 
 _____________________
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png) Licensed under WTFPL v2 (see the file [COPYING](COPYING)).

@@ -206,7 +206,7 @@ const propertyKeywords = {
 // There has to be exactly 32 in each array, in the right order.
 // The array index corresponds to the bit it names in the bitmask.
 // For example strHandlingFlags[5] should have the name for the flag (0x1 << 5)
-// Undocumented flags are named after their value in the following format: "(0x1 << 2)"
+// Undocumented flags should have an empty string!
 const flagNames = {
     strModelFlags: [
         "IS_VAN",
@@ -245,36 +245,36 @@ const flagNames = {
     strHandlingFlags: [
         "SMOOTH_COMPRESN",
         "REDUCED_MOD_MASS",
-        "(0x1 << 2)",
-        "(0x1 << 3)",
+        "",
+        "",
         "NO_HANDBRAKE",
         "STEER_REARWHEELS",
         "HB_REARWHEEL_STEER",
         "STEER_ALL_WHEELS",
         "FREEWHEEL_NO_GAS",
         "NO_REVERSE",
-        "(0x1 << 10)",
+        "",
         "STEER_NO_WHEELS",
         "CVT",
         "ALT_EXT_WHEEL_BOUNDS_BEH",
         "DONT_RAISE_BOUNDS_AT_SPEED",
-        "(0x1 << 15)",
+        "",
         "LESS_SNOW_SINK",
         "TYRES_CAN_CLIP",
-        "(0x1 << 18)",
-        "(0x1 << 19)",
+        "",
+        "",
         "OFFROAD_ABILITY",
         "OFFROAD_ABILITY2",
         "HF_TYRES_RAISE_SIDE_IMPACT_THRESHOLD",
-        "(0x1 << 23)",
+        "",
         "ENABLE_LEAN",
-        "(0x1 << 25)",
+        "",
         "HEAVYARMOUR",
         "ARMOURED",
         "SELF_RIGHTING_IN_WATER",
         "IMPROVED_RIGHTING_FORCE",
-        "(0x1 << 30)",
-        "(0x1 << 31)"
+        "",
+        ""
     ],
     strDamageFlags: [
         "DRIVER_SIDE_FRONT_DOOR",
@@ -283,66 +283,66 @@ const flagNames = {
         "DRIVER_PASSENGER_SIDE_REAR_DOOR",
         "BONNET",
         "BOOT",
-        "(0x1 << 6)",
-        "(0x1 << 7)",
-        "(0x1 << 8)",
-        "(0x1 << 9)",
-        "(0x1 << 10)",
-        "(0x1 << 11)",
-        "(0x1 << 12)",
-        "(0x1 << 13)",
-        "(0x1 << 14)",
-        "(0x1 << 15)",
-        "(0x1 << 16)",
-        "(0x1 << 17)",
-        "(0x1 << 18)",
-        "(0x1 << 19)",
-        "(0x1 << 20)",
-        "(0x1 << 21)",
-        "(0x1 << 22)",
-        "(0x1 << 23)",
-        "(0x1 << 24)",
-        "(0x1 << 25)",
-        "(0x1 << 26)",
-        "(0x1 << 27)",
-        "(0x1 << 28)",
-        "(0x1 << 29)",
-        "(0x1 << 30)",
-        "(0x1 << 30)"
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
     ],
     strAdvancedFlags: [
-        "(0x1 << 0)",
-        "(0x1 << 1)",
-        "(0x1 << 2)",
-        "(0x1 << 3)",
-        "(0x1 << 4)",
-        "(0x1 << 5)",
-        "(0x1 << 6)",
-        "(0x1 << 7)",
-        "(0x1 << 8)",
-        "(0x1 << 9)",
-        "(0x1 << 10)",
-        "(0x1 << 11)",
-        "(0x1 << 12)",
-        "(0x1 << 13)",
-        "(0x1 << 14)",
-        "(0x1 << 15)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
         "Lower shifting points",
         "Over revving",
         "Bouncy suspension",
-        "(0x1 << 19)",
-        "(0x1 << 20)",
-        "(0x1 << 21)",
-        "(0x1 << 22)",
-        "(0x1 << 23)",
-        "(0x1 << 24)",
-        "(0x1 << 25)",
-        "(0x1 << 26)",
-        "(0x1 << 27)",
-        "(0x1 << 28)",
-        "(0x1 << 29)",
-        "(0x1 << 30)",
-        "(0x1 << 30)"
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
     ]
 };
 
@@ -356,7 +356,11 @@ function flagHexToStrArr(flagsHex, flagArr) {
 
     for (var i=0x0; i<0x20; i++) {
         if (((0x1 << i) & flagsInt) !== 0x0) {
-            ret.push(flagArr[i]);
+            var flagName = flagArr[i];
+            if (flagName === "") {
+                flagName = "(0x1 << " + i + ")";
+            }
+            ret.push(flagName);
         }
     }
 
@@ -488,6 +492,10 @@ module.exports = {
         if (!is_string(propertyName)) return propertyCategories.missing_property;
         if (propertyCategories.hasOwnProperty(propertyName)) return propertyCategories[propertyName];
         else return propertyCategories.missing_property;
+    },
+
+    getKeywords: function() {
+        return propertyKeywords;
     },
 
     convertFlagsPropertyToFlagNames: function (hex, propertyName) {
