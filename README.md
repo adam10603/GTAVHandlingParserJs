@@ -256,7 +256,7 @@ ___
 ```javascript
 function findPropertiesForVehicle(vehicle, propertySearch)
 ```
-> Returns one or more properties of a vehicle that match the search term in some way. The returned properties will either have the search term occur in their names (e.g. "driveforce" would return "fInitialDriveForce"), or if the search term is one of the pre-defined keywords (such as "cornering"), then all properties assigned to this keyword will be returned. Check the source code for the keywords and the properties they return.
+> Returns one or more properties of a vehicle that match the search term in some way. The returned properties will either have the search term occur in their names (e.g. "driveforce" would return "fInitialDriveForce"), or if the search term is one of the pre-defined keywords (such as "cornering"), then all properties assigned to this keyword will be returned. You can obtain a list of keywords and the properties they return with `getKeywords()`.
 >
 > **Arguments**
 >
@@ -272,7 +272,7 @@ function findPropertiesForVehicle(vehicle, propertySearch)
 ## Object structure of handling data
 
 
-The structure of objects that hold handling data (e.g. as returned by `findPropertiesForVehicle()`) is pretty simple. For the most part, it's just a **flat object with property names** as keys, and their values as values obviously. They are **not grouped** into any sub-objects or anything (regardless if the property is inside "SubHandlingData" in the original file for example), with one exception, which are 3-component vectors (properties that start with "vec"). These are just objects with `x`, `y` and `z` floating point components.
+The handling data (e.g. as returned by `findPropertiesForVehicle()`) is structured in a simple way. For the most part, it's just a **flat object indexed by property names**. They are **not grouped** into any sub-objects or anything (regardless if the property is inside "SubHandlingData" in the original file for example). The one exception to this are 3-component vectors (properties that start with "vec"). These are returned as objects with `x`, `y` and `z` floating point components.
 
 Here's an example object with one property of each possible data type, represented as JSON here:
 
