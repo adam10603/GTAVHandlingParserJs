@@ -65,7 +65,7 @@ client.on('message', msg => {
         }
 
         // Getting the simple handling summary
-        var vehicleHandling = vehicleHandling = handling.getSimpleHandlingForVehicle(vehicleName);
+        var vehicleHandling = handling.getSimpleHandlingForVehicle(vehicleName);
 
         if (vehicleHandling === null) {
             /*
