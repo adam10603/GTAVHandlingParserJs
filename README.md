@@ -52,7 +52,7 @@ client.on('ready', () => {
 client.on('message', msg => {
     if (msg.content.startsWith("!handling ")) {
         // Getting an array of all arguments
-        var args = msgLowercase.substr(10).split(" ");
+        var args = msg.content.substr(10).split(" ");
 
         // First argument is the vehicle name (not using the rest in this example)
         var vehicleName = args[0];
