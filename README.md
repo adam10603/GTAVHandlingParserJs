@@ -1,5 +1,5 @@
 # GTA V Handling Parser (for Node.js)
-![Version](https://img.shields.io/badge/Version-1.01-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
+![Version](https://img.shields.io/badge/Version-1.02-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
 
 Table of contents:
   * [Intro](#intro)
@@ -300,6 +300,8 @@ Notice that "handlingName" is not returned, so keep track of the vehicle name se
 * v1.01
   * Added `getKeywords()`
   * Small code changes
+* v1.02
+  * Added `INCREASED_GRAVITY` handling flag
 
 _____________________
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png) Licensed under WTFPL v2 (see the file [COPYING](COPYING)).

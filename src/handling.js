@@ -266,7 +266,7 @@ const flagNames = {
         "OFFROAD_ABILITY",
         "OFFROAD_ABILITY2",
         "HF_TYRES_RAISE_SIDE_IMPACT_THRESHOLD",
-        "",
+        "INCREASED_GRAVITY",
         "ENABLE_LEAN",
         "",
         "HEAVYARMOUR",
