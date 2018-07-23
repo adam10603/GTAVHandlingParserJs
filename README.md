@@ -272,9 +272,9 @@ function findPropertiesForVehicle(vehicle, propertySearch)
 ## Object structure of handling data
 
 
-The handling data (e.g. as returned by `findPropertiesForVehicle()`) is structured in a simple way. For the most part, it's just a **flat object indexed by property names**. They are **not grouped** into sub-objects or anything (regardless if the property was inside "SubHandlingData" for example). The only time a value is an object is with vectors (properties that start with "vec"). These have 3 floating point components named `x`, `y` and `z`.
+The handling data (e.g. as returned by `findPropertiesForVehicle()`) is simply given as an **object indexed by property names**. They are **not grouped** into sub-objects or anything (regardless if the property was inside "SubHandlingData" for example). The only values that are objects themselves are vectors (properties that start with "vec"). These have 3 floating point components named `x`, `y` and `z`.
 
-Here's an example object with one property of each possible data type, represented as JSON here:
+Here's an example object with every possible type of property, represented as JSON:
 
 ```json
 {
