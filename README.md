@@ -289,7 +289,7 @@ Here's an example object with every possible type of property, represented as JS
 }
 ```
 
-Notice that "handlingName" is not returned, so keep track of the vehicle name separately.
+"handlingName" is never returned with the handling data object, so keep track of the vehicle name separately.
 
 
 ## Version history
