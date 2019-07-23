@@ -38,6 +38,7 @@ const simpleProperties = [
     "fBrakeBiasFront",
     "fSteeringLock",
     "fTractionCurveMax",
+    "fTractionBiasFront",
     "fTractionLossMult",
     "fSuspensionUpperLimit",
     "strModelFlags",
@@ -246,7 +247,7 @@ const flagNames = {
         "SMOOTH_COMPRESN",
         "REDUCED_MOD_MASS",
         "",
-        "",
+        "OFFROAD_ABILITY3 ???",
         "NO_HANDBRAKE",
         "STEER_REARWHEELS",
         "HB_REARWHEEL_STEER",
@@ -469,6 +470,10 @@ function loadHandlingData(path, force = false) {
 
                 if (propertyName.startsWith("f")) handlingTmp[propertyName] = parseFloat(valueStr);
                 else if (propertyName.startsWith("n")) handlingTmp[propertyName] = parseInt(valueStr);
+                else if (propertyName.indexOf("Flags") >= 0 && (propertyName in handlingTmp)) {
+                    var newValue = parseInt(handlingTmp[propertyName], 16) | parseInt(valueStr, 16);
+                    handlingTmp[propertyName] = newValue.toString(16);
+                }
                 else handlingTmp[propertyName] = valueStr;
             });
 
@@ -484,13 +489,13 @@ module.exports = {
 
     getDlcNameForVehicle: function(vehicle) {
         if (!(is_string(vehicle)) || vehicle.length <= 0) return null;
-        if (dlcNames.hasOwnProperty(vehicle)) return dlcNames[vehicle];
+        if (vehicle in dlcNames) return dlcNames[vehicle];
         else return null;
     },
 
     getCategoryOfProperty: function(propertyName) {
         if (!is_string(propertyName)) return propertyCategories.missing_property;
-        if (propertyCategories.hasOwnProperty(propertyName)) return propertyCategories[propertyName];
+        if (propertyName in propertyCategories) return propertyCategories[propertyName];
         else return propertyCategories.missing_property;
     },
 
@@ -500,35 +505,35 @@ module.exports = {
 
     convertFlagsPropertyToFlagNames: function (hex, propertyName) {
         if (!is_string(hex) || !is_string(propertyName)) return null;
-        if (flagNames.hasOwnProperty(propertyName)) {
+        if (propertyName in flagNames) {
             return flagHexToStrArr(hex, flagNames[propertyName]);
         } else return null;
     },
 
     isPropertyConvertableToFlagNames: function (propertyName) {
-        return flagNames.hasOwnProperty(propertyName);
+        return (propertyName in flagNames);
     },
 
     doesVehicleExist: function(vehicle) {
         if (!(is_string(vehicle)) || vehicle.length <= 0) return false;
-        return handlingData.hasOwnProperty(vehicle.toLowerCase());
+        return (vehicle.toLowerCase() in handlingData);
     },
 
     getHandlingForVehicle: function (vehicle) {
         if (!(is_string(vehicle)) || vehicle.length <= 0) return null;
         vehicle = vehicle.toLowerCase();
-        if (handlingData.hasOwnProperty(vehicle)) return handlingData[vehicle];
+        if (vehicle in handlingData) return handlingData[vehicle];
         else return null;
     },
 
     getSimpleHandlingForVehicle: function (vehicle) {
         if (!is_string(vehicle) || vehicle.length <= 0) return null;
         vehicle = vehicle.toLowerCase();
-        if (handlingData.hasOwnProperty(vehicle)) {
+        if (vehicle in handlingData) {
             var ret = {};
             var vehicleHandling = handlingData[vehicle];
             simpleProperties.map(propertyName => {
-                if (vehicleHandling.hasOwnProperty(propertyName)) ret[propertyName] = vehicleHandling[propertyName];
+                if (propertyName in vehicleHandling) ret[propertyName] = vehicleHandling[propertyName];
             });
             return ret;
         }
@@ -538,9 +543,9 @@ module.exports = {
     getPropertyForVehicle: function (vehicle, property) {
         if (!is_string(vehicle) || vehicle.length <= 0 || !is_string(property) || property.length <= 0) return null;
         vehicle = vehicle.toLowerCase();
-        if (handlingData.hasOwnProperty(vehicle)) {
+        if (vehicle in handlingData) {
             var vehicleHandling = handlingData[vehicle];
-            if (vehicleHandling.hasOwnProperty(property)) {
+            if (property in vehicleHandling) {
                 var ret = {};
                 ret[property] = vehicleHandling[property];
                 return ret;
@@ -553,7 +558,7 @@ module.exports = {
         if (!is_string(vehicle) || vehicle.length <= 0 || !is_string(propertySearch) || propertySearch.length <= 0) return null;
         vehicle = vehicle.toLowerCase();
         propertySearch = propertySearch.toLowerCase();
-        if (handlingData.hasOwnProperty(vehicle)) {
+        if (vehicle in handlingData) {
             var vehicleHandling = handlingData[vehicle];
             var properties = Object.keys(vehicleHandling);
             var ret = {};
@@ -561,7 +566,7 @@ module.exports = {
                 if (propertyName.toLowerCase().includes(propertySearch)) {
                     ret[propertyName] = vehicleHandling[propertyName];
                 } else {
-                    if (propertyKeywords.hasOwnProperty(propertySearch)) {
+                    if (propertySearch in propertyKeywords) {
                         if (propertyKeywords[propertySearch].findIndex(val => { return val == propertyName; }) != -1) {
                             ret[propertyName] = vehicleHandling[propertyName];
                         }
