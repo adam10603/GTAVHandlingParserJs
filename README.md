@@ -1,5 +1,5 @@
 # GTA V Handling Parser (for Node.js)
-![Version](https://img.shields.io/badge/Version-1.2-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
+![Version](https://img.shields.io/badge/Version-1.3-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
 
 Table of contents:
   * [Intro](#intro)
@@ -307,6 +307,8 @@ Here's an example object with every possible type of property, represented as JS
   * Added `OFFROAD_ABILITY3` handling flag, still under testing though (hence the "???")
 * v1.2
   * Added `Stock rim radius` and `Suspension affects roll` advanced flags
+* v1.3
+  * Added `Open wheel behavior` advanced flag
 
 _____________________
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png) Licensed under WTFPL v2 (see the file [COPYING](COPYING)).
